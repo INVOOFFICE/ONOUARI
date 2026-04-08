@@ -8,3 +8,7 @@
 # Optional local preview/scratch files
 *.tmp
 *.bak
+
+# Ignore TEST folders
+TEST/
+**/TEST/
