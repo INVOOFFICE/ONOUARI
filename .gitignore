@@ -1,0 +1,10 @@
+# Ignore test documents
+*test*.doc
+*test*.docx
+*test*.pdf
+*document_test*
+*doc_test*
+
+# Optional local preview/scratch files
+*.tmp
+*.bak

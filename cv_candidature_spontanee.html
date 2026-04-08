@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Interactif | Onouari Youssef</title>
+<meta name="description" content="CV moderne, animé et responsive de Onouari Youssef, prêt pour GitHub Pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-soft: #131a30;
+    --surface: rgba(19, 26, 48, 0.6);
+    --card: rgba(255, 255, 255, 0.06);
+    --text: #ecf0ff;
+    --muted: #b7c1e0;
+    --line: rgba(255, 255, 255, 0.15);
+    --primary: #6ca3ff;
+    --accent: #7df6d9;
+    --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="light"] {
+    --bg: #f3f6ff;
+    --bg-soft: #ffffff;
+    --surface: rgba(255, 255, 255, 0.85);
+    --card: #f7f9ff;
+    --text: #13203b;
+    --muted: #4f6185;
+    --line: rgba(19, 32, 59, 0.15);
+    --primary: #2e67ff;
+    --accent: #15b79e;
+    --shadow: 0 16px 35px rgba(26, 43, 74, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: Inter, Arial, sans-serif;
+    background:
+      radial-gradient(circle at 10% -10%, rgba(108, 163, 255, 0.2), transparent 30%),
+      radial-gradient(circle at 90% 0%, rgba(125, 246, 217, 0.14), transparent 35%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    width: min(1120px, 92%);
+    margin: 0 auto;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg-soft) 74%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    gap: 16px;
+  }
+
+  .brand {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav a, .theme-toggle, .lang-btn {
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 999px;
+    transition: transform 0.24s ease, background 0.24s ease, border-color 0.24s ease;
+  }
+
+  .nav a:hover, .theme-toggle:hover, .lang-btn:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--primary) 60%, var(--line));
+    background: color-mix(in srgb, var(--primary) 16%, var(--surface));
+  }
+
+  .hero {
+    padding: 70px 0 48px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+
+  .hero-main, .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .hero-main {
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(108, 163, 255, 0.45), rgba(125, 246, 217, 0.28), transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .profile-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+
+  .hero-main::after {
+    content: "";
+    position: absolute;
+    inset: auto -35% -45% auto;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(108, 163, 255, 0.25), transparent 68%);
+    pointer-events: none;
+  }
+
+  .tagline {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 8px rgba(125, 246, 217, 0.12);
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.08;
+    margin-bottom: 12px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .intro {
+    color: var(--muted);
+    max-width: 66ch;
+    margin-bottom: 22px;
+  }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .chip {
+    border: 1px solid var(--line);
+    background: var(--card);
+    padding: 8px 11px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .chip:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--line));
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.24s ease, filter 0.24s ease;
+  }
+
+  .btn.primary {
+    background: linear-gradient(130deg, var(--primary), color-mix(in srgb, var(--primary) 65%, var(--accent)));
+    color: #fff;
+  }
+
+  .btn.secondary {
+    border-color: var(--line);
+    color: var(--text);
+    background: var(--card);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+
+  .hero-card {
+    padding: 22px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .impact-photo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .impact-photo {
+    width: 100%;
+    max-width: 100%;
+    height: 320px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 20px;
+    border: 2px solid color-mix(in srgb, var(--primary) 45%, var(--line));
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .stat {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px 14px 12px;
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat .value {
+    font-size: clamp(30px, 3.1vw, 36px);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--primary);
+  }
+
+  .stat .label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 7px;
+    line-height: 1.35;
+  }
+
+  section {
+    padding: 0 0 40px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(6px);
+    transition: transform 0.28s ease, border-color 0.28s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--primary) 55%, var(--line));
+  }
+
+  .timeline {
+    border-left: 1px dashed var(--line);
+    margin-left: 6px;
+    padding-left: 18px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 22%, transparent);
+  }
+
+  .timeline-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .timeline-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 3px 0 8px;
+  }
+
+  .timeline ul {
+    padding-left: 18px;
+  }
+
+  .timeline li {
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+
+  .timeline li::marker {
+    color: color-mix(in srgb, var(--primary) 70%, var(--accent));
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .project-card {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 14px;
+    padding: 12px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.24s ease, border-color 0.24s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--primary) 50%, var(--line));
+  }
+
+  .project-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+
+  .project-meta {
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+
+  .project-list {
+    padding-left: 18px;
+    margin-top: 2px;
+    margin-bottom: 0;
+  }
+
+  .project-list li {
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .exp-card {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 14px;
+    padding: 12px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.24s ease, border-color 0.24s ease;
+  }
+
+  .exp-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--primary) 50%, var(--line));
+  }
+
+  .exp-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+
+  .exp-meta {
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+
+  .exp-list {
+    padding-left: 18px;
+    margin: 0;
+  }
+
+  .exp-list li {
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .skills span {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 999px;
+    font-size: 13px;
+    padding: 8px 12px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .skills span:hover {
+    transform: translateY(-2px) scale(1.02);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+
+  .language {
+    display: grid;
+    gap: 12px;
+  }
+
+  .lang-row {
+    display: grid;
+    gap: 5px;
+  }
+
+  .lang-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+
+  .bar {
+    height: 8px;
+    background: color-mix(in srgb, var(--line) 70%, transparent);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(120deg, var(--primary), var(--accent));
+    border-radius: inherit;
+    transition: width 1s cubic-bezier(.2, .8, .2, 1);
+  }
+
+  .availability {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .availability > div {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .availability > div.full {
+    grid-column: 1 / -1;
+  }
+
+  .availability strong {
+    color: var(--text);
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  footer {
+    padding: 24px 0 36px;
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    justify-content: center;
+  }
+
+  .contact-links a {
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .contact-links a:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  @media (max-width: 940px) {
+    .hero { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .availability { grid-template-columns: 1fr 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 620px) {
+    .topbar-inner { align-items: flex-start; flex-direction: column; }
+    .hero-main, .hero-card, .card { padding: 18px; border-radius: 16px; }
+    .availability { grid-template-columns: 1fr; }
+    .timeline-title { font-size: 16px; }
+    .impact-photo {
+      height: 280px;
+      border-radius: 16px;
+    }
+    .stat {
+      min-height: 82px;
+      padding: 12px 12px 10px;
+    }
+    .stat .value {
+      font-size: 30px;
+    }
+    .stat .label {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body data-theme="dark">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand" id="brandText">Onouari Youssef · CV interactif</div>
+      <nav class="nav" aria-label="Navigation du CV">
+        <a href="#profil" id="navProfil">Profil</a>
+        <a href="#experience" id="navExperience">Experience</a>
+        <a href="#competences" id="navCompetences">Competences</a>
+        <a href="#contact" id="navContact">Contact</a>
+        <button class="lang-btn" type="button" id="langFr" aria-label="Passer en francais">FR</button>
+        <button class="lang-btn" type="button" id="langEn" aria-label="Switch to English">EN</button>
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Basculer le theme">Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <article class="hero-main reveal">
+        <div class="profile-head">
+          <div class="tagline"><span class="dot"></span><span id="taglineText">Disponible immediatement</span></div>
+        </div>
+        <h1 id="heroTitle">Profil polyvalent pour candidature spontanee.</h1>
+        <p class="intro" id="heroIntro">
+          Profil operationnel, administratif et polyvalent : j'interviens en accueil, coordination, communication, support digital et logistique. Je m'adapte rapidement aux besoins de l'entreprise et je contribue avec rigueur, autonomie et fiabilite.
+        </p>
+        <div class="chips">
+          <span class="chip" id="chipMobility">Mobilite internationale (Worldwide), selon opportunites et conditions d'obtention de visa</span>
+          <span class="chip" id="chipContracts">CDD · Interim · Saisonnier</span>
+          <span class="chip" id="chipOpen">Ouvert a tout secteur</span>
+          <span class="chip" id="chipDynamic">Dynamique et fiable</span>
+          <span class="chip" id="chipDigital">Creation de solutions digitales pour TPE, PME et entrepreneurs</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" id="whatsappBtn" href="https://wa.me/212630230803?text=Bonjour%20Onouari%20Youssef%2C%20je%20vous%20contacte%20concernant%20votre%20CV." target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.5 3.5A11.8 11.8 0 0012.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.5 5.9L0 24l6.4-1.7a11.9 11.9 0 005.7 1.5h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.6-8.4zM12.2 21.8h-.1a10 10 0 01-5.1-1.4l-.4-.2-3.8 1 1-3.7-.3-.4a9.9 9.9 0 01-1.6-5.3c0-5.5 4.5-10 10-10 2.7 0 5.2 1 7.1 2.9a10 10 0 012.9 7.1c0 5.5-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-1-1.6-2.1-1.8-2.4-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .8.8.2 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/>
+            </svg>
+            <span id="whatsappBtnText">WhatsApp</span>
+          </a>
+          <a class="btn secondary" href="#experience" id="viewJourneyBtn">Voir mon parcours</a>
+        </div>
+      </article>
+
+      <aside class="hero-card reveal">
+        <h2 class="section-title" id="impactTitle">Impact rapide</h2>
+        <div class="impact-photo-wrap">
+          <img class="impact-photo" src="./cfc687cc-5139-4b23-8c84-01e9beb671c3.jfif" alt="Portrait de Onouari Youssef">
+        </div>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="value" data-count="8">0</div>
+            <div class="label" id="statExp">ans d'experience</div>
+          </div>
+          <div class="stat">
+            <div class="value" data-count="3">0</div>
+            <div class="label" id="statDomains">domaines majeurs</div>
+          </div>
+          <div class="stat">
+            <div class="value" data-count="100">0</div>
+            <div class="label" id="statEngagement">engagement (%)</div>
+          </div>
+          <div class="stat">
+            <div class="value" data-count="24">0</div>
+            <div class="label" id="statStart">h pour demarrer</div>
+          </div>
+        </div>
+        <div class="contact-links" id="contact">
+          <a href="tel:+212630230803">+212 630 23 08 03</a>
+          <a href="mailto:ysonouari@gmail.com">ysonouari@gmail.com</a>
+          <a href="#">Tanger, Maroc</a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="profil" class="grid-2">
+      <article class="card reveal">
+        <h2 class="section-title" id="profileTitle">Profil</h2>
+        <p id="profileP1">
+          Je candidate de maniere spontanee sur des postes operationnels, administratifs, logistiques ou relationnels. Mon objectif est clair : integrer rapidement une equipe, comprendre les priorites et contribuer efficacement des les premiers jours.
+        </p>
+        <br>
+        <p id="profileP2">
+          Je suis reconnu pour ma polyvalence, ma capacite a gerer plusieurs taches en parallele et ma maitrise des outils numeriques modernes, y compris des solutions sur mesure pour TPE, PME et entrepreneurs.
+        </p>
+      </article>
+      <article class="card reveal">
+        <h2 class="section-title" id="languagesTitle">Langues</h2>
+        <div class="language">
+          <div class="lang-row">
+            <div class="lang-head"><span>Arabe</span><span>Natif</span></div>
+            <div class="bar"><div class="fill" data-width="100%"></div></div>
+          </div>
+          <div class="lang-row">
+            <div class="lang-head"><span>Francais</span><span>Intermediaire</span></div>
+            <div class="bar"><div class="fill" data-width="68%"></div></div>
+          </div>
+          <div class="lang-row">
+            <div class="lang-head"><span>Anglais</span><span>Notions</span></div>
+            <div class="bar"><div class="fill" data-width="30%"></div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="experience">
+      <article class="card reveal">
+        <h2 class="section-title" id="experienceTitle">Experience professionnelle</h2>
+        <div class="exp-grid">
+          <div class="exp-card">
+            <h3 class="exp-title">Assistant Administratif & Coordination</h3>
+            <div class="exp-meta">DP Services Contact Center · Tanger · 2024 - Present</div>
+            <ul class="exp-list">
+              <li>Suivi administratif complet : documents, factures, archivage.</li>
+              <li>Coordination entre equipes internes, clients et partenaires.</li>
+              <li>Mise en place d'outils pour fluidifier les processus.</li>
+            </ul>
+          </div>
+
+          <div class="exp-card">
+            <h3 class="exp-title">Charge de communication & Outils digitaux</h3>
+            <div class="exp-meta">Facelook · Tanger · 2018 - 2023</div>
+            <ul class="exp-list">
+              <li>Gestion de plusieurs clients avec priorisation efficace.</li>
+              <li>Creation d'outils de suivi client et reporting.</li>
+              <li>Production et publication de contenus digitaux.</li>
+            </ul>
+          </div>
+
+          <div class="exp-card">
+            <h3 class="exp-title">Graphiste & Assistant communication</h3>
+            <div class="exp-meta">Delta Act / Raji Web · Agadir · 2016 - 2018</div>
+            <ul class="exp-list">
+              <li>Creation de supports visuels multi-secteurs.</li>
+              <li>Respect des briefs et delais en contexte exigeant.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="competences" class="grid-2">
+      <article class="card reveal">
+        <h2 class="section-title" id="skillsTitle">Competences cles</h2>
+        <div class="skills">
+          <span>Accueil client</span>
+          <span>Organisation</span>
+          <span>Communication</span>
+          <span>Travail en equipe</span>
+          <span>Bureautique</span>
+          <span>Outils digitaux</span>
+          <span>Reseaux sociaux</span>
+          <span>Gestion des stocks</span>
+          <span>Graphisme</span>
+          <span>Informatique</span>
+          <span>Redaction</span>
+          <span>Polyvalence</span>
+          <span>Creation de solutions digitales</span>
+          <span>Solutions pour TPE, PME et entrepreneurs</span>
+          <span>Solutions sur mesure pour usage metier</span>
+          <span>Donnees hebergees chez le client (on-premise)</span>
+          <span>Travail hors ligne</span>
+          <span>Automatisation</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <h2 class="section-title" id="availabilityTitle">Disponibilite & conditions</h2>
+        <div class="availability">
+          <div><span id="availLabel1">Disponibilite</span><strong id="availValue1">Immediate</strong></div>
+          <div class="full"><span id="availLabel2">Mobilite</span><strong id="availValue2">Internationale (Worldwide), selon opportunites et conditions d'obtention de visa</strong></div>
+          <div><span id="availLabel3">Contrat</span><strong id="availValue3">Flexible</strong></div>
+          <div><span id="availLabel4">Logement</span><strong id="availValue4">Accepte si propose</strong></div>
+          <div><span id="availLabel5">Horaires</span><strong id="availValue5">Adaptables</strong></div>
+          <div><span id="availLabel6">Demarrage</span><strong id="availValue6">Des que possible</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="projets">
+      <article class="card reveal">
+        <h2 class="section-title" id="projectsTitle">Projets de solutions digitales realises</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3 class="project-title">INVOOffice</h3>
+            <div class="project-meta">Solution de gestion de facturation conforme DGI Maroc</div>
+            <ul class="project-list">
+              <li>Gestion des factures, devis, bons de livraison et avoirs.</li>
+              <li>Verification en temps reel des informations administratives (ICE, IF, RC).</li>
+              <li>Gestion TVA multi-taux : 0%, 7%, 10%, 14%, 20%.</li>
+              <li>Arrete en lettres automatique pour les montants.</li>
+              <li>Gestion du stock avec deduction automatique.</li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">INVOORent Pro</h3>
+            <div class="project-meta">Solution de gestion de flotte automobile et location</div>
+            <ul class="project-list">
+              <li>Gestion complete des vehicules, clients et disponibilites.</li>
+              <li>Gestion des reservations et contrats de location.</li>
+              <li>Suivi des maintenances par vehicule.</li>
+              <li>Fiche client avec historique complet des operations.</li>
+              <li>Tableau de bord et statistiques de pilotage.</li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">INVOOCoffee</h3>
+            <div class="project-meta">Solution caisse et gestion pour cafes et restaurants</div>
+            <ul class="project-list">
+              <li>Caisse tactile rapide (POS) pour prise de commande fluide.</li>
+              <li>Gestion du menu, categories et articles.</li>
+              <li>Suivi des ventes en temps reel.</li>
+              <li>Rapports journaliers et mensuels.</li>
+              <li>Gestion des stocks consommables.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chips" style="margin-top:14px; margin-bottom:0;">
+          <span class="chip">Technologies utilisees : HTML, CSS, JavaScript</span>
+          <span class="chip">Architecture offline-first</span>
+          <span class="chip">Stockage local / donnees maitrisees par le client</span>
+          <span class="chip">Automatisation de processus metiers</span>
+          <span class="chip">Solutions sur mesure pour TPE, PME, entrepreneurs</span>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <article class="card reveal">
+        <h2 class="section-title" id="educationTitle">Formation</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3 class="timeline-title">DTS Systemes et Reseaux Informatiques</h3>
+            <div class="timeline-meta">Institut specialise de technologie · Agadir</div>
+          </div>
+          <div class="timeline-item">
+            <h3 class="timeline-title">Baccalaureat Sciences Physiques</h3>
+            <div class="timeline-meta">Lycee Mokhtar Soucis · 2013</div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span id="footerText">© 2026 Onouari Youssef. Tous droits reserves.</span>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  const revealItems = document.querySelectorAll(".reveal");
+  const counters = document.querySelectorAll("[data-count]");
+  const langFills = document.querySelectorAll(".fill");
+  const skills = document.querySelectorAll(".skills span");
+  const timelineItems = document.querySelectorAll(".timeline-item");
+  const themeToggle = document.getElementById("themeToggle");
+  const langFrBtn = document.getElementById("langFr");
+  const langEnBtn = document.getElementById("langEn");
+  const whatsappBtn = document.getElementById("whatsappBtn");
+  const impactPhoto = document.querySelector(".impact-photo");
+  const root = document.body;
+  let countersStarted = false;
+
+  const translations = {
+    fr: {
+      docLang: "fr",
+      brandText: "Onouari Youssef · CV interactif",
+      navProfil: "Profil",
+      navExperience: "Experience",
+      navCompetences: "Competences",
+      navContact: "Contact",
+      themeToggle: "Theme",
+      taglineText: "Disponible immediatement",
+      heroTitle: "Profil polyvalent pour candidature spontanee.",
+      heroIntro: "Profil operationnel, administratif et polyvalent : j'interviens en accueil, coordination, communication, support digital et logistique. Je m'adapte rapidement aux besoins de l'entreprise et je contribue avec rigueur, autonomie et fiabilite.",
+      chipMobility: "Mobilite internationale (Worldwide), selon opportunites et conditions d'obtention de visa",
+      chipContracts: "CDD · Interim · Saisonnier",
+      chipOpen: "Ouvert a tout secteur",
+      chipDynamic: "Dynamique et fiable",
+      chipDigital: "Creation de solutions digitales pour TPE, PME et entrepreneurs",
+      whatsappBtnText: "WhatsApp",
+      viewJourneyBtn: "Voir mon parcours",
+      impactTitle: "Impact rapide",
+      statExp: "ans d'experience",
+      statDomains: "domaines majeurs",
+      statEngagement: "engagement (%)",
+      statStart: "h pour demarrer",
+      profileTitle: "Profil",
+      profileP1: "Je candidate de maniere spontanee sur des postes operationnels, administratifs, logistiques ou relationnels. Mon objectif est clair : integrer rapidement une equipe, comprendre les priorites et contribuer efficacement des les premiers jours.",
+      profileP2: "Je suis reconnu pour ma polyvalence, ma capacite a gerer plusieurs taches en parallele et ma maitrise des outils numeriques modernes, y compris des solutions sur mesure pour TPE, PME et entrepreneurs.",
+      languagesTitle: "Langues",
+      experienceTitle: "Experience professionnelle",
+      skillsTitle: "Competences cles",
+      availabilityTitle: "Disponibilite & conditions",
+      availLabel1: "Disponibilite",
+      availValue1: "Immediate",
+      availLabel2: "Mobilite",
+      availValue2: "Internationale (Worldwide), selon opportunites et conditions d'obtention de visa",
+      availLabel3: "Contrat",
+      availValue3: "Flexible",
+      availLabel4: "Logement",
+      availValue4: "Accepte si propose",
+      availLabel5: "Horaires",
+      availValue5: "Adaptables",
+      availLabel6: "Demarrage",
+      availValue6: "Des que possible",
+      projectsTitle: "Projets de solutions digitales realises",
+      educationTitle: "Formation",
+      footerText: "© 2026 Onouari Youssef. Tous droits reserves.",
+      waText: "Bonjour Onouari Youssef, je vous contacte concernant votre CV."
+    },
+    en: {
+      docLang: "en",
+      brandText: "Onouari Youssef · Interactive CV",
+      navProfil: "Profile",
+      navExperience: "Experience",
+      navCompetences: "Skills",
+      navContact: "Contact",
+      themeToggle: "Theme",
+      taglineText: "Available immediately",
+      heroTitle: "Versatile profile for spontaneous applications.",
+      heroIntro: "Operational, administrative, and versatile profile: I work across reception, coordination, communication, digital support, and logistics. I adapt quickly to company needs and contribute with rigor, autonomy, and reliability.",
+      chipMobility: "International mobility (Worldwide), depending on opportunities and visa conditions",
+      chipContracts: "Fixed-term · Temporary · Seasonal",
+      chipOpen: "Open to all sectors",
+      chipDynamic: "Dynamic and reliable",
+      chipDigital: "Building digital solutions for SMBs and entrepreneurs",
+      whatsappBtnText: "WhatsApp",
+      viewJourneyBtn: "View my background",
+      impactTitle: "Quick impact",
+      statExp: "years of experience",
+      statDomains: "core domains",
+      statEngagement: "commitment (%)",
+      statStart: "hours to start",
+      profileTitle: "Profile",
+      profileP1: "I apply spontaneously for operational, administrative, logistics, or customer-facing roles. My goal is clear: integrate quickly, understand priorities, and contribute effectively from day one.",
+      profileP2: "I am recognized for my versatility, my ability to handle multiple tasks in parallel, and my command of modern digital tools, including tailored solutions for SMBs and entrepreneurs.",
+      languagesTitle: "Languages",
+      experienceTitle: "Professional experience",
+      skillsTitle: "Key skills",
+      availabilityTitle: "Availability & conditions",
+      availLabel1: "Availability",
+      availValue1: "Immediate",
+      availLabel2: "Mobility",
+      availValue2: "International (Worldwide), depending on opportunities and visa eligibility",
+      availLabel3: "Contract",
+      availValue3: "Flexible",
+      availLabel4: "Accommodation",
+      availValue4: "Accepted if provided",
+      availLabel5: "Schedule",
+      availValue5: "Adaptable",
+      availLabel6: "Start date",
+      availValue6: "As soon as possible",
+      projectsTitle: "Digital solutions delivered",
+      educationTitle: "Education",
+      footerText: "© 2026 Onouari Youssef. All rights reserved.",
+      waText: "Hello Onouari Youssef, I am contacting you regarding your CV."
+    }
+  };
+
+  function applyLanguage(lang) {
+    const dict = translations[lang] || translations.fr;
+    document.documentElement.lang = dict.docLang;
+
+    Object.keys(dict).forEach((key) => {
+      if (key === "docLang" || key === "waText") return;
+      const el = document.getElementById(key);
+      if (el) el.textContent = dict[key];
+    });
+
+    const waTextEncoded = encodeURIComponent(dict.waText);
+    whatsappBtn.href = `https://wa.me/212630230803?text=${waTextEncoded}`;
+    localStorage.setItem("cv-lang", lang);
+  }
+
+  const animateCounters = () => {
+    if (countersStarted) return;
+    countersStarted = true;
+
+    counters.forEach((counter) => {
+      const target = Number(counter.dataset.count);
+      const duration = 1300;
+      const start = performance.now();
+
+      const update = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = String(Math.floor(eased * target));
+        if (progress < 1) requestAnimationFrame(update);
+      };
+
+      requestAnimationFrame(update);
+    });
+  };
+
+  const heroCard = document.querySelector(".hero-card");
+  const runFallbackAnimations = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.18 });
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          langFills.forEach((fill) => {
+            fill.style.width = fill.dataset.width;
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+
+    if (heroCard) countObserver.observe(heroCard);
+  };
+
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.set(revealItems, { y: 24, autoAlpha: 0 });
+    gsap.to(".hero-main", { y: 0, autoAlpha: 1, duration: 0.8, ease: "power2.out" });
+    gsap.to(".hero-card", { y: 0, autoAlpha: 1, duration: 0.9, delay: 0.12, ease: "power2.out" });
+
+    revealItems.forEach((item) => {
+      gsap.to(item, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.75,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 82%",
+          once: true
+        }
+      });
+    });
+
+    timelineItems.forEach((item, index) => {
+      gsap.fromTo(item,
+        { x: -20, autoAlpha: 0.2 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.65,
+          ease: "power2.out",
+          delay: index * 0.05,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 88%",
+            once: true
+          }
+        }
+      );
+    });
+
+    skills.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        gsap.to(item, { y: -2, scale: 1.03, duration: 0.2, ease: "power1.out" });
+      });
+      item.addEventListener("mouseleave", () => {
+        gsap.to(item, { y: 0, scale: 1, duration: 0.2, ease: "power1.out" });
+      });
+    });
+
+    if (impactPhoto) {
+      gsap.fromTo(impactPhoto,
+        { scale: 0.96, autoAlpha: 0.85 },
+        {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: impactPhoto,
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+    }
+
+    if (heroCard) {
+      ScrollTrigger.create({
+        trigger: heroCard,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          animateCounters();
+          langFills.forEach((fill) => {
+            gsap.to(fill, {
+              width: fill.dataset.width,
+              duration: 1,
+              ease: "power3.out"
+            });
+          });
+        }
+      });
+    }
+  } else {
+    runFallbackAnimations();
+  }
+
+  const savedTheme = localStorage.getItem("cv-theme");
+  if (savedTheme === "light") {
+    root.setAttribute("data-theme", "light");
+  }
+
+  themeToggle.addEventListener("click", () => {
+    const isLight = root.getAttribute("data-theme") === "light";
+    const nextTheme = isLight ? "dark" : "light";
+    root.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("cv-theme", nextTheme);
+  });
+
+  const savedLang = localStorage.getItem("cv-lang");
+  const browserLang = (navigator.language || "").toLowerCase();
+  const autoLang = browserLang.startsWith("fr") ? "fr" : "en";
+  applyLanguage(savedLang || autoLang);
+
+  langFrBtn.addEventListener("click", () => applyLanguage("fr"));
+  langEnBtn.addEventListener("click", () => applyLanguage("en"));
+</script>
+</body>
+</html>
